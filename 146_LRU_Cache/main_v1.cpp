@@ -14,7 +14,7 @@ struct Node {
 
 class LRUCache {
 public:
-    LRUCache(int capacity) 
+    LRUCache(int capacity)
         : capacity(capacity)
         , head(make_shared<Node>(-1, -1))
         , tail(make_shared<Node>(-1, -1))
@@ -22,7 +22,7 @@ public:
         head->next = tail;
         tail->pre = head;
     }
-    
+
     int get(int key) {
         // if found in cache, move history to most recently, return value
         auto it = cache.find(key);
@@ -35,7 +35,7 @@ public:
             return -1;
         }
     }
-    
+
     void put(int key, int value) {
         // if found in cache, update value and move history to most recently
         auto it = cache.find(key);
@@ -69,7 +69,7 @@ private:
             node->pre->next = node->next;
             node->next->pre = node->pre;
         }
-        
+
         // put the node to tail
         node->pre = tail->pre;
         node->next = tail;
@@ -83,7 +83,7 @@ private:
     // map[key] = Node
     unordered_map<int, shared_ptr<Node>> cache;
 
-    // double link list of Node for record access history 
+    // double link list of Node for record access history
     //   (least recently used to most recently used)
     shared_ptr<Node> head;
     shared_ptr<Node> tail;
